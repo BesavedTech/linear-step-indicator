@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:linear_step_indicator/src/linear_step_indicator.dart';
+
 import 'package:linear_step_indicator/src/constants.dart';
+import 'package:linear_step_indicator/src/linear_step_indicator.dart';
 
 class StepIndicatorPageView extends StatelessWidget {
   ///Controller for tracking page changes.
@@ -81,33 +82,39 @@ class StepIndicatorPageView extends StatelessWidget {
   ///Textstyle for an inactive label
   final TextStyle? inActiveLabelStyle;
 
+  final ValueChanged<dynamic>? onChanged;
+
+  final bool enable;
+
   const StepIndicatorPageView({
     Key? key,
-    required this.steps,
     required this.controller,
+    required this.steps,
     required this.children,
+    this.iconSize = kIconSize,
+    this.nodeSize = kDefaultSize,
+    this.lineHeight = kDefaultLineHeight,
+    this.completedIcon = kCompletedIcon,
     this.activeBorderColor = kActiveColor,
     this.inActiveBorderColor = kInActiveColor,
     this.activeLineColor = kActiveLineColor,
     this.inActiveLineColor = kInActiveLineColor,
     this.activeNodeColor = kActiveColor,
     this.inActiveNodeColor = kInActiveNodeColor,
-    this.iconSize = kIconSize,
-    this.completedIcon = kCompletedIcon,
     this.nodeThickness = kDefaultThickness,
-    this.nodeSize = kDefaultSize,
-    this.verticalPadding = kDefaultSize,
-    this.lineHeight = kDefaultLineHeight,
     this.shape = BoxShape.circle,
     this.iconColor = kIconColor,
     this.backgroundColor = kIconColor,
+    this.complete,
+    this.verticalPadding = kDefaultSize,
     this.spacing = kDefaultSize,
     this.bottomSpacing = 0,
     this.indicatorPosition = IndicatorPosition.top,
-    this.complete,
+    this.labels = const <String>[],
     this.activeLabelStyle,
     this.inActiveLabelStyle,
-    this.labels = const <String>[],
+    this.onChanged,
+    required this.enable,
   }) : super(key: key);
 
   @override
@@ -147,6 +154,8 @@ class StepIndicatorPageView extends StatelessWidget {
               child: PageView(
                 controller: controller,
                 children: children,
+                onPageChanged: onChanged,
+                allowImplicitScrolling: enable,
               ),
             ),
             if (indicatorPosition == IndicatorPosition.bottom) ...[
