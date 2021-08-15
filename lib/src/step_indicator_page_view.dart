@@ -86,6 +86,8 @@ class StepIndicatorPageView extends StatelessWidget {
 
   final bool enable;
 
+  final bool done;
+
   const StepIndicatorPageView({
     Key? key,
     required this.controller,
@@ -115,6 +117,7 @@ class StepIndicatorPageView extends StatelessWidget {
     this.inActiveLabelStyle,
     this.onChanged,
     this.enable = false,
+    required this.done,
   }) : super(key: key);
 
   @override
@@ -138,6 +141,7 @@ class StepIndicatorPageView extends StatelessWidget {
                 activeNodeColor: activeNodeColor,
                 inActiveNodeColor: inActiveNodeColor,
                 shape: shape,
+                done: done,
                 iconColor: iconColor,
                 iconSize: iconSize,
                 verticalPadding: verticalPadding,
@@ -181,6 +185,7 @@ class StepIndicatorPageView extends StatelessWidget {
                 lineHeight: lineHeight,
                 nodeSize: nodeSize,
                 nodeThickness: nodeThickness,
+                 done: done,
               ),
               SizedBox(height: bottomSpacing),
             ],

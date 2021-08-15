@@ -30,6 +30,7 @@ class StepIndicatorDemo extends StatelessWidget {
       child: Center(
         child: LinearStepIndicator(
           steps: STEPS,
+          done: false,
           controller: PageController(),
           labels: List<String>.generate(STEPS, (index) => "Step ${index + 1}"),
           complete: () {
@@ -59,6 +60,7 @@ class _StepIndicatorPageViewDemoState extends State<StepIndicatorPageViewDemo> {
       child: StepIndicatorPageView(
         enable: false,
         steps: STEPS,
+        done: false,
         indicatorPosition: IndicatorPosition.top,
         labels: List<String>.generate(STEPS, (index) => "Step ${index + 1}"),
         controller: _pageController,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:linear_step_indicator/src/constants.dart';
+
 import 'extensions.dart';
 import 'node.dart';
 
@@ -12,6 +14,8 @@ class LinearStepIndicator extends StatefulWidget {
 
   ///Number of nodes to paint on screen
   final int steps;
+
+  final bool done;
 
   ///[completedIcon] size
   final double iconSize;
@@ -72,24 +76,25 @@ class LinearStepIndicator extends StatefulWidget {
 
   const LinearStepIndicator({
     Key? key,
-    required this.steps,
     required this.controller,
+    required this.steps,
+    required this.done,
+    this.iconSize = kIconSize,
+    this.nodeSize = kDefaultSize,
+    this.lineHeight = kDefaultLineHeight,
+    this.completedIcon = kCompletedIcon,
     this.activeBorderColor = kActiveColor,
     this.inActiveBorderColor = kInActiveColor,
     this.activeLineColor = kActiveLineColor,
     this.inActiveLineColor = kInActiveLineColor,
     this.activeNodeColor = kActiveColor,
     this.inActiveNodeColor = kInActiveNodeColor,
-    this.iconSize = kIconSize,
-    this.completedIcon = kCompletedIcon,
     this.nodeThickness = kDefaultThickness,
-    this.nodeSize = kDefaultSize,
-    this.verticalPadding = kDefaultSize,
-    this.lineHeight = kDefaultLineHeight,
     this.shape = BoxShape.circle,
     this.iconColor = kIconColor,
     this.backgroundColor = kIconColor,
     this.complete,
+    this.verticalPadding = kDefaultSize,
     this.labels = const <String>[],
     this.activeLabelStyle,
     this.inActiveLabelStyle,
@@ -116,25 +121,32 @@ class _LinearStepIndicatorState extends State<LinearStepIndicator> {
 
     widget.controller.addListener(
       () async {
-        if (widget.controller.page! > lastStep) {
-          setState(
-            () {
-              nodes[lastStep].completed = true;
-              lastStep = widget.controller.page!.ceil();
-            },
-          );
-        }
+        setState(
+          () {
+            nodes[lastStep].completed = widget.done;
+            lastStep = widget.controller.page!.ceil() - 1;
+          },
+        );
+
+        // if (widget.controller.page! > lastStep) {
+        //   setState(
+        //     () {
+        //       nodes[lastStep].completed = widget.done;
+        //       lastStep = widget.controller.page!.ceil();
+        //     },
+        //   );
+        // }
 
         //checks if the controller has hit the max step
         //and checks [complete] to complete last node (or not)
 
-        if (widget.controller.page! == widget.steps - 1 &&
-            widget.complete != null) {
-          if (await widget.complete!()) {
-            nodes[widget.steps - 1].completed = true;
-            setState(() {});
-          }
-        }
+        // if (widget.controller.page! == widget.steps - 1 &&
+        //     widget.complete != null) {
+        //   if (await widget.complete!()) {
+        //     nodes[widget.steps - 1].completed = true;
+        //     setState(() {});
+        //   }
+        // }
       },
     );
   }
