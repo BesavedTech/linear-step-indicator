@@ -57,6 +57,7 @@ class _StepIndicatorPageViewDemoState extends State<StepIndicatorPageViewDemo> {
   Widget build(BuildContext context) {
     return Material(
       child: StepIndicatorPageView(
+        enable: false,
         steps: STEPS,
         indicatorPosition: IndicatorPosition.top,
         labels: List<String>.generate(STEPS, (index) => "Step ${index + 1}"),

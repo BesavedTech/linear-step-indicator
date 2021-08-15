@@ -114,7 +114,7 @@ class StepIndicatorPageView extends StatelessWidget {
     this.activeLabelStyle,
     this.inActiveLabelStyle,
     this.onChanged,
-    required this.enable,
+    this.enable = false,
   }) : super(key: key);
 
   @override
