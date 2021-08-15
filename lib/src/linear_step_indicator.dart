@@ -124,7 +124,7 @@ class _LinearStepIndicatorState extends State<LinearStepIndicator> {
         setState(
           () {
             nodes[lastStep].completed = widget.done;
-            lastStep = widget.controller.page!.ceil() - 1;
+            lastStep = widget.controller.page!.ceil();
           },
         );
 
