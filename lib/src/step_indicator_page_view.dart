@@ -155,7 +155,9 @@ class StepIndicatorPageView extends StatelessWidget {
                 controller: controller,
                 children: children,
                 onPageChanged: onChanged,
-                allowImplicitScrolling: enable,
+                physics: enable
+                    ? BouncingScrollPhysics()
+                    : NeverScrollableScrollPhysics(),
               ),
             ),
             if (indicatorPosition == IndicatorPosition.bottom) ...[
